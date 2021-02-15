@@ -7,9 +7,15 @@ enum GameState { start, jumping, falling, end }
 
 class _HomePageState extends State<HomePage> {
   GameState state = GameState.end;
+  static const FPS = 40;
+  int delta = (1000 / FPS).round();
+  int time = 0;
+  Timer timer;
 
   void start() {
     state = GameState.start;
+    if (timer == null)
+      timer = Timer.periodic(Duration(milliseconds: delta), update);
   }
   void jump() {
     if (state == GameState.end) start();
@@ -22,6 +28,11 @@ class _HomePageState extends State<HomePage> {
 
   void end() {
     state = GameState.end;
+  }
+
+  void update(Timer timer) {
+    time += delta;
+  }
 
   }
   @override
