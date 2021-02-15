@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   void jump() {
     if (state == GameState.end) start();
+    if (state == GameState.jumping || birdY < 0) return;
     from = birdY;
     to = birdY - 150;
     duration = 500;
