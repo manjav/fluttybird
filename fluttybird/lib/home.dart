@@ -9,12 +9,15 @@ class _HomePageState extends State<HomePage> {
   GameState state = GameState.end;
 
   void start() {
+    state = GameState.start;
   }
   void jump() {
     if (state == GameState.end) start();
+    state = GameState.jumping;
   }
 
   void fall() {
+    state = GameState.falling;
   }
 
   void end() {
