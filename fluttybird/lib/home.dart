@@ -67,9 +67,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   void easeIn(int t, Function() onEnd) {
+    if (t >= duration) {
+      onEnd();
+      return;
+    }
     birdY = from + (to - from) * (1 - sqrt(1 - pow(t / duration, 2)));
   }
 
+  void easeOut(int t, Function() onEnd) {
+    if (t >= duration) {
+      onEnd();
+      return;
   }
     birdY = from + (to - from) * sqrt(1 - pow(t / duration - 1, 2));
   }
