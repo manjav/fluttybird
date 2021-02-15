@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:math';
+import 'package:flutter/material.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -16,11 +20,22 @@ class _HomePageState extends State<HomePage> {
 
   double from;
   double to;
+  double _y = 300;
+  get birdY => _y;
+  set birdY(double birdY) {
+    setState(() {
+      _y = birdY;
+      birdAngle = birdY / 1000 - 0.2;
+    });
+  }
+
   void start() {
+    birdY = 200;
     state = GameState.start;
     if (timer == null)
       timer = Timer.periodic(Duration(milliseconds: delta), update);
   }
+
   void jump() {
     if (state == GameState.end) start();
     from = birdY;
@@ -52,9 +67,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void easeIn(int t, Function() onEnd) {
+    birdY = from + (to - from) * (1 - sqrt(1 - pow(t / duration, 2)));
   }
 
   }
+    birdY = from + (to - from) * sqrt(1 - pow(t / duration - 1, 2));
   }
 
   @override
