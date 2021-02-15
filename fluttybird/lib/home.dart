@@ -10,8 +10,12 @@ class _HomePageState extends State<HomePage> {
   static const FPS = 40;
   int delta = (1000 / FPS).round();
   int time = 0;
+  int duration;
+  int startTime;
   Timer timer;
 
+  double from;
+  double to;
   void start() {
     state = GameState.start;
     if (timer == null)
@@ -19,10 +23,18 @@ class _HomePageState extends State<HomePage> {
   }
   void jump() {
     if (state == GameState.end) start();
+    from = birdY;
+    to = birdY - 150;
+    duration = 500;
+    startTime = time;
     state = GameState.jumping;
   }
 
   void fall() {
+    from = birdY;
+    to = 700;
+    startTime = time;
+    duration = ((to - from) / 0.7).round();
     state = GameState.falling;
   }
 
@@ -32,9 +44,19 @@ class _HomePageState extends State<HomePage> {
 
   void update(Timer timer) {
     time += delta;
+    if (state == GameState.jumping) {
+      easeOut(time - startTime, fall);
+    } else if (state == GameState.falling) {
+      easeIn(time - startTime, end);
+    }
+  }
+
+  void easeIn(int t, Function() onEnd) {
   }
 
   }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
