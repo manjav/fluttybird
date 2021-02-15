@@ -6,7 +6,19 @@ class HomePage extends StatefulWidget {
 enum GameState { start, jumping, falling, end }
 
 class _HomePageState extends State<HomePage> {
+  GameState state = GameState.end;
+
+  void start() {
+  }
   void jump() {
+    if (state == GameState.end) start();
+  }
+
+  void fall() {
+  }
+
+  void end() {
+    state = GameState.end;
 
   }
   @override
