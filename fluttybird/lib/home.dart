@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'dart:math';
+
+// import 'package:flame/game.dart';
+// import 'package:fluttybird/game.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   int startTime;
   Timer timer;
 
+  double birdAngle;
   double from;
   double to;
   double _y = 300;
@@ -79,12 +83,15 @@ class _HomePageState extends State<HomePage> {
     if (t >= duration) {
       onEnd();
       return;
-  }
+    }
     birdY = from + (to - from) * sqrt(1 - pow(t / duration - 1, 2));
   }
 
   @override
   Widget build(BuildContext context) {
+    // return GameWidget(
+    //   game: MyGame(),
+    // );
     return Scaffold(
         appBar: AppBar(title: Text('y $state')),
         body: GestureDetector(
