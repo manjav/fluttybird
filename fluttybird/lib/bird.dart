@@ -28,6 +28,7 @@ class Bird extends SpriteComponent {
 
   void jump() {
     if (state == State.end) start();
+    if (state == State.jumping || y < 0) return;
     from = y;
     to = y - 150;
     duration = 0.5;
