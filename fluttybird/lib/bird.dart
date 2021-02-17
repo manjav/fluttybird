@@ -24,6 +24,7 @@ class Bird extends SpriteComponent {
     x = 100;
     y = 200;
     state = State.start;
+    sprite.paint.color = Color(0xFFFFFFFF);
   }
 
   void jump() {
@@ -47,6 +48,7 @@ class Bird extends SpriteComponent {
 
   void end() {
     state = State.end;
+    sprite.paint.color = Color(0xAAFFFFFF);
   }
 
   @override
@@ -73,8 +75,8 @@ class Bird extends SpriteComponent {
     if (t >= duration) {
       onEnd();
       return;
-  }
+    }
     y = from + (to - from) * sqrt(1 - pow(t / duration - 1, 2));
     angle = y / 1000 - 0.2;
   }
-  }
+}
