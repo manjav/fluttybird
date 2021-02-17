@@ -26,5 +26,9 @@ class MyGame extends BaseGame with TapDetector {
 
   @override
   void onTap() {
+    bird.jump();
+    // print(details.globalPosition);
+    // bird.x = details.localPosition.dx;
+    // bird.y = details.localPosition.dy;
   }
-  }
+}
