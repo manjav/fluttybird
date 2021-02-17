@@ -27,6 +27,7 @@ class Bird extends SpriteComponent {
   }
 
   void jump() {
+    if (state == State.end) start();
     from = y;
     to = y - 150;
     duration = 0.5;
@@ -51,7 +52,28 @@ class Bird extends SpriteComponent {
   void update(double t) {
     super.update(t);
     time += t;
+    if (state == State.jumping) {
+      easeOut(time - startTime, fall);
+    } else if (state == State.falling) {
+      easeIn(time - startTime, end);
+    }
   }
+
+  void easeIn(double t, Function() onEnd) {
+    if (t >= duration) {
+      onEnd();
+      return;
+    }
+    y = from + (to - from) * (1 - sqrt(1 - pow(t / duration, 2)));
+    angle = y / 1000 - 0.2;
   }
+
+  void easeOut(double t, Function() onEnd) {
+    if (t >= duration) {
+      onEnd();
+      return;
+  }
+    y = from + (to - from) * sqrt(1 - pow(t / duration - 1, 2));
+    angle = y / 1000 - 0.2;
   }
   }
